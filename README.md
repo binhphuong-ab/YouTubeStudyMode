@@ -30,6 +30,7 @@ It does three things:
 - [Questions and problems](#questions-and-problems)
 - [Known limitations](#known-limitations)
 - [For developers](#for-developers)
+- [License](#license)
 
 ---
 
@@ -355,3 +356,12 @@ Notes:
 - YouTube enforces *Trusted Types*, so the code never uses `innerHTML`; elements are built with a tiny `h()` helper.
 - YouTube recycles video-card elements for other videos as you scroll, so `saved.js` re-reads a card at click time
   instead of trusting what it saw earlier.
+
+---
+
+## License
+
+[MIT](LICENSE) © 2026 binhphuong-ab. In plain words: you may use, copy, change and share this extension, even
+in your own projects, as long as you keep the copyright notice. It comes with no warranty.
+
+YouTube is a trademark of Google LLC. This project is not affiliated with or endorsed by YouTube or Google.
