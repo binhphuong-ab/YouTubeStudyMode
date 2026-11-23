@@ -241,17 +241,14 @@ So Study Mode doesn't download anything itself. It **lets YouTube load the trans
 
 ```mermaid
 flowchart TD
-    A["You open a video"] --> B{"Has YouTube already<br/>loaded captions?<br/>e.g. CC is on"}
-    B -- yes --> R["Read them"]
-    B -- no --> C["Quietly open YouTube's own<br/>Show transcript panel<br/>(kept invisible)"]
-    C --> D{"Did YouTube<br/>send the transcript?"}
-    D -- yes --> R
-    D -- no --> E["Try YouTube's older<br/>transcript request"]
-    E --> F{"Worked?"}
-    F -- yes --> R
-    F -- no --> G["Ask the video player to load<br/>one caption track"]
-    G --> R
-    R --> P["Join into sentences,<br/>time each word,<br/>show the panel"]
+    A["You open a video"] --> T1["Try 1 · Has YouTube already loaded captions?<br/>(for example, CC is on)"]
+    T1 -- "not yet" --> T2["Try 2 · Quietly open YouTube's own<br/>transcript panel, kept invisible"]
+    T2 -- "no answer" --> T3["Try 3 · YouTube's older transcript request"]
+    T3 -- "failed" --> T4["Try 4 · Ask the video player<br/>to load one caption track"]
+    T1 -- "found" --> R["Join into sentences, time each word,<br/>show the panel"]
+    T2 -- "found" --> R
+    T3 -- "found" --> R
+    T4 --> R
 ```
 
 ### One-click "Not interested"
