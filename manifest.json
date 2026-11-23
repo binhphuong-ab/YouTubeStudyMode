@@ -1,0 +1,43 @@
+{
+  "manifest_version": 3,
+  "name": "YouTube Study Mode",
+  "version": "1.3.0",
+  "description": "Distraction-free YouTube for learning: readable synced transcript, Home without thumbnails, one-click Not interested, Saved list.",
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "permissions": [
+    "storage"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.youtube.com/*",
+        "https://m.youtube.com/*"
+      ],
+      "js": [
+        "src/main-world.js"
+      ],
+      "run_at": "document_start",
+      "world": "MAIN"
+    },
+    {
+      "matches": [
+        "https://www.youtube.com/*",
+        "https://m.youtube.com/*"
+      ],
+      "js": [
+        "src/parser.js",
+        "src/styles.js",
+        "src/content.js",
+        "src/saved.js"
+      ],
+      "css": [
+        "src/page.css"
+      ],
+      "run_at": "document_start"
+    }
+  ]
+}

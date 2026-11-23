@@ -1,0 +1,470 @@
+/* Light-DOM rules. Everything is gated on classes content.js puts on <html>. */
+
+/* Hide the recommendation column under our panel (toggle in the ⋮ menu). */
+html.ytlt-hide-related ytd-watch-flexy #related {
+  display: none !important;
+}
+
+/*
+ * We open YouTube's own transcript panel so YouTube fetches the transcript for us.
+ * Keep it out of sight but still "on screen" (not display:none) so its lazy loader fires.
+ * The new combined "In this video" panel has no target-id, only [is-sync-scroll-panel];
+ * it is hidden only while we load (users may open it themselves later).
+ */
+html.ytlt-on ytd-engagement-panel-section-list-renderer[target-id*="transcript"],
+html.ytlt-loading ytd-engagement-panel-section-list-renderer[is-sync-scroll-panel] {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 380px !important;
+  height: 60vh !important;
+  max-height: none !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+  z-index: -1 !important;
+}
+
+/* ---------- m.youtube.com ---------- */
+/* The comments teaser and the related-videos list under the player (toggle: "Hide recommended videos"). */
+/* Never hide a block that contains the title / like-share row (layouts differ logged-in vs out). */
+html.ytlt-mobile.ytlt-hide-related ytm-slim-video-metadata-section-renderer ~ ytm-item-section-renderer:not(:has(ytm-slim-video-metadata-section-renderer)),
+html.ytlt-mobile.ytlt-hide-related ytm-single-column-watch-next-results-renderer > ytm-item-section-renderer:not(:has(ytm-slim-video-metadata-section-renderer)),
+html.ytlt-mobile.ytlt-hide-related ytm-single-column-watch-next-results-renderer .related-items-container:not(:has(ytm-slim-video-metadata-section-renderer)) {
+  display: none !important;
+}
+/*
+ * Compact mode (m.youtube): the video moves to the very top, and the YouTube top bar plus the
+ * title / like-share block become floating layers that slide in when the video is tapped.
+ * They float over the transcript instead of pushing it, so nothing jumps.
+ * JS sets --ytlt-pb (player bottom, px) and --ytlt-bg (page background) on <html>.
+ */
+html.ytlt-compact ytm-app {
+  padding-top: 0 !important;
+}
+html.ytlt-compact #player-container-id {
+  top: 0 !important;
+}
+html.ytlt-compact ytm-mobile-topbar-renderer {
+  background: var(--ytlt-bg, #0f0f0f) !important;
+  transform: translateY(-100%);
+  transition: transform 0.25s ease;
+  z-index: 6 !important;
+}
+html.ytlt-compact ytm-slim-video-metadata-section-renderer {
+  position: fixed !important;
+  left: 0 !important;
+  right: 0 !important;
+  top: var(--ytlt-meta-top, var(--ytlt-pb, 232px)) !important;
+  z-index: 5 !important;
+  background: var(--ytlt-bg, #0f0f0f) !important;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+  opacity: 0;
+  transform: translateY(-12px);
+  pointer-events: none;
+  transition: opacity 0.22s ease, transform 0.22s ease;
+}
+html.ytlt-compact.ytlt-reveal ytm-mobile-topbar-renderer {
+  transform: none;
+}
+html.ytlt-compact.ytlt-reveal ytm-slim-video-metadata-section-renderer {
+  opacity: 1;
+  transform: none;
+  pointer-events: auto;
+}
+
+/* Focus mode's full-screen layer: transparent and click-through, so the page shows underneath it.
+   Only our panel is moved inside it (the rest of the page is inert while it is full screen);
+   content.js explains why the page itself is not made full screen. */
+#ytlt-focus {
+  display: none;
+}
+#ytlt-focus:fullscreen {
+  display: block;
+  background: transparent !important;
+  pointer-events: none !important;
+}
+#ytlt-focus::backdrop {
+  background: transparent !important;
+}
+#ytlt-focus > #ytlt-host {
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin: 0 8px !important;
+  pointer-events: auto;
+}
+
+html.ytlt-mobile #ytlt-host {
+  margin: 4px 8px 8px;
+}
+
+#ytlt-host {
+  display: block;
+  margin: 0 0 16px;
+}
+#ytlt-host[hidden] {
+  display: none;
+}
+
+/* ======================================================================
+ * saved.js — Home without thumbnails + "Saved" list (desktop only)
+ * Colours come from YouTube's own variables, so light / dark both follow.
+ * ====================================================================== */
+
+/* ---------- Home feed without thumbnails (html.ytlt-nothumbs) ---------- */
+html.ytlt-nothumbs ytd-browse[page-subtype="home"] yt-lockup-view-model .ytLockupViewModelContentImage,
+html.ytlt-nothumbs ytd-browse[page-subtype="home"] ytd-rich-section-renderer,
+html.ytlt-nothumbs ytd-browse[page-subtype="home"] ytd-rich-item-renderer:has(ytd-ad-slot-renderer),
+html.ytlt-nothumbs ytd-browse[page-subtype="home"] ytd-rich-grid-renderer > #masthead-ad,
+html.ytlt-nothumbs ytd-app #video-preview {
+  display: none !important;
+}
+html.ytlt-nothumbs ytd-browse[page-subtype="home"] ytd-rich-item-renderer {
+  margin-bottom: 8px !important;
+}
+/*
+ * Equal card heights. The grid row (#contents) is a wrapping flexbox, so every item in a row is
+ * already as tall as the row, but ytd-rich-item-renderer is display:block and #content /
+ * yt-lockup-view-model are *row* flexboxes, so the visible card box never grew with it.
+ * Make the chain column flexboxes down to the card box, then give every card the height of the
+ * common case (2-line title + channel line + duration) so rows match each other too. A card with an
+ * extra line ("Dubbed", "Mix") makes only its own row taller.
+ */
+html.ytlt-nothumbs ytd-browse[page-subtype="home"] ytd-rich-item-renderer,
+html.ytlt-nothumbs ytd-browse[page-subtype="home"] ytd-rich-item-renderer > #content,
+html.ytlt-nothumbs ytd-browse[page-subtype="home"] ytd-rich-item-renderer yt-lockup-view-model {
+  display: flex !important;
+  flex-direction: column !important;
+}
+html.ytlt-nothumbs ytd-browse[page-subtype="home"] ytd-rich-item-renderer > #content,
+html.ytlt-nothumbs ytd-browse[page-subtype="home"] ytd-rich-item-renderer yt-lockup-view-model {
+  flex: 1 1 auto !important;
+}
+html.ytlt-nothumbs ytd-browse[page-subtype="home"] yt-lockup-view-model .ytLockupViewModelHost {
+  flex: 1 1 auto !important;
+  min-height: 11.4rem;
+  padding: 12px 8px 12px 12px;
+  border-radius: 12px;
+  border: 1px solid var(--yt-spec-10-percent-layer, rgba(128, 128, 128, 0.2));
+  box-sizing: border-box;
+}
+/* The "loading more" item holds ~364px of grey placeholder thumbnails ("ghost cards"); sharing the
+   last row, it stretched those cards to its height. Drop the placeholders and give the spinner its
+   own row (it must stay in the page: reaching it is what loads the next batch). */
+html.ytlt-nothumbs ytd-browse[page-subtype="home"] ytd-rich-grid-renderer #contents > ytd-continuation-item-renderer #ghost-cards {
+  display: none !important;
+}
+html.ytlt-nothumbs ytd-browse[page-subtype="home"] ytd-rich-grid-renderer #contents > ytd-continuation-item-renderer {
+  flex: 0 0 100% !important;
+  width: 100% !important;
+  max-width: none !important;
+}
+html.ytlt-nothumbs ytd-browse[page-subtype="home"] yt-lockup-view-model .ytLockupViewModelHost:hover {
+  background: var(--yt-spec-badge-chip-background, rgba(128, 128, 128, 0.12));
+}
+html.ytlt-nothumbs ytd-browse[page-subtype="home"] yt-lockup-view-model .ytLockupViewModelMetadata {
+  margin-top: 0 !important;
+}
+.ytlt-dur {
+  display: none;
+}
+html.ytlt-nothumbs ytd-browse[page-subtype="home"] .ytlt-dur {
+  display: block;
+  margin-top: 4px;
+  font: 500 1.2rem/1.8rem Roboto, Arial, sans-serif;
+  color: var(--yt-spec-text-secondary, #aaa);
+}
+
+/* ---------- Bookmark button on cards ----------
+ * YouTube's ⋮ button is position:absolute (top -6px, right -10px, 40×40) in a right-hand column the
+ * title text never enters. Sit in that same column, right under ⋮, so the title keeps its width and
+ * the two buttons never overlap however long or short the title is. */
+.ytlt-save {
+  position: absolute;
+  top: 38px;
+  right: -8px;
+  width: 36px;
+  height: 36px;
+  margin: 0;
+  padding: 8px;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--yt-spec-text-primary, #f1f1f1);
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 0.15s ease;
+}
+/* The title already stops short of the ⋮ column; the channel / views line under it does not. */
+yt-lockup-metadata-view-model:has(> .ytlt-save) .ytLockupMetadataViewModelMetadata {
+  padding-right: 32px;
+}
+.ytlt-save svg {
+  width: 20px;
+  height: 20px;
+  fill: currentColor;
+  display: block;
+}
+yt-lockup-view-model:hover .ytlt-save,
+.ytlt-save:focus-visible,
+.ytlt-save.on {
+  opacity: 1;
+}
+.ytlt-save:hover {
+  background: var(--yt-spec-badge-chip-background, rgba(128, 128, 128, 0.2));
+}
+.ytlt-save.on {
+  color: var(--yt-spec-call-to-action, #3ea6ff);
+}
+
+/* ---------- Home: one-click "Not interested" in place of ⋮ ----------
+ * The ⋮ button stays in the page (saved.js clicks it to reach YouTube's menu), only unseen. */
+ytd-browse[page-subtype="home"] yt-lockup-metadata-view-model:has(> .ytlt-ni) > .ytLockupMetadataViewModelMenuButton {
+  visibility: hidden !important;
+  pointer-events: none !important;
+}
+.ytlt-ni {
+  position: absolute;
+  top: -6px;
+  right: -10px;
+  width: 40px;
+  height: 40px;
+  padding: 10px;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--yt-spec-text-primary, #f1f1f1);
+  cursor: pointer;
+}
+.ytlt-ni svg {
+  width: 20px;
+  height: 20px;
+  fill: currentColor;
+  display: block;
+}
+.ytlt-ni:hover {
+  background: var(--yt-spec-badge-chip-background, rgba(128, 128, 128, 0.2));
+}
+.ytlt-ni.busy {
+  opacity: 0.4;
+  pointer-events: none;
+}
+.ytlt-ni.fail {
+  color: #ff4e45;
+}
+/* After "Not interested" the card leaves the grid; YouTube's "Video removed · Undo / Tell us why"
+   replacement card is never shown. */
+/* "html ytd-app" only raises specificity above the equal-height rule's display:flex !important. */
+html ytd-app ytd-browse[page-subtype="home"] ytd-rich-item-renderer.ytlt-dismissed,
+html ytd-app ytd-browse[page-subtype="home"] ytd-rich-item-renderer:has(.ytDismissibleItemReplacedContent) {
+  display: none !important;
+}
+/* While saved.js drives the ⋮ menu, it must never appear on screen. */
+html.ytlt-silent-menu ytd-popup-container tp-yt-iron-dropdown {
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
+/* ---------- Watch page button (before Like / Share) ---------- */
+.ytlt-save-watch {
+  flex: none;
+  align-self: flex-start; /* YouTube's buttons are top-aligned in this row */
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 40px;
+  margin: 0 8px 0 0;
+  padding: 0 16px 0 12px;
+  border: 0;
+  border-radius: 20px;
+  background: var(--yt-spec-badge-chip-background, rgba(128, 128, 128, 0.2));
+  color: var(--yt-spec-text-primary, #f1f1f1);
+  font: 500 1.4rem/4rem Roboto, Arial, sans-serif;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.ytlt-save-watch:hover {
+  background: var(--yt-spec-button-chip-background-hover, rgba(128, 128, 128, 0.3));
+}
+.ytlt-save-watch svg {
+  width: 22px;
+  height: 22px;
+  fill: currentColor;
+}
+.ytlt-save-watch.on svg {
+  fill: var(--yt-spec-call-to-action, #3ea6ff);
+}
+
+/* ---------- "Saved" section in the left guide ---------- */
+#ytlt-saved {
+  padding: 12px;
+  border-bottom: 1px solid var(--yt-spec-10-percent-layer, rgba(128, 128, 128, 0.2));
+  font-family: Roboto, Arial, sans-serif;
+  color: var(--yt-spec-text-primary, #f1f1f1);
+}
+#ytlt-saved button {
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: 0;
+  cursor: pointer;
+}
+#ytlt-saved svg {
+  fill: currentColor;
+  display: block;
+}
+.ytlt-sv-head {
+  display: flex;
+  align-items: center;
+}
+.ytlt-sv-title {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+  height: 40px;
+  padding: 0 12px !important;
+  border-radius: 10px;
+  font-size: 1.6rem !important;
+  font-weight: 700 !important;
+  text-align: left;
+}
+.ytlt-sv-title:hover,
+.ytlt-sv-icon:hover,
+.ytlt-sv-more:hover {
+  background: var(--yt-spec-badge-chip-background, rgba(128, 128, 128, 0.15)) !important;
+}
+.ytlt-sv-count {
+  font-size: 1.2rem;
+  font-weight: 500;
+  line-height: 1.8rem;
+  padding: 0 7px;
+  border-radius: 9px;
+  background: var(--yt-spec-badge-chip-background, rgba(128, 128, 128, 0.2));
+  color: var(--yt-spec-text-secondary, #aaa);
+}
+.ytlt-sv-title svg {
+  width: 20px;
+  height: 20px;
+  margin-left: auto;
+  transition: transform 0.15s ease;
+  transform: rotate(180deg);
+}
+#ytlt-saved.collapsed .ytlt-sv-title svg {
+  transform: none;
+}
+.ytlt-sv-icon {
+  flex: none;
+  width: 40px;
+  height: 40px;
+  padding: 10px !important;
+  border-radius: 50%;
+  color: var(--yt-spec-text-secondary, #aaa) !important;
+}
+.ytlt-sv-icon svg {
+  width: 20px;
+  height: 20px;
+}
+.ytlt-sv-item {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 8px 12px;
+  border-radius: 10px;
+  color: inherit;
+  text-decoration: none;
+}
+.ytlt-sv-item:hover {
+  background: var(--yt-spec-badge-chip-background, rgba(128, 128, 128, 0.15));
+}
+.ytlt-sv-av {
+  flex: none;
+  width: 24px;
+  height: 24px;
+  margin-top: 1px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+.ytlt-sv-av-empty {
+  display: grid;
+  place-items: center;
+  font-size: 1.2rem;
+  font-weight: 500;
+  background: var(--yt-spec-badge-chip-background, rgba(128, 128, 128, 0.3));
+}
+.ytlt-sv-txt {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.ytlt-sv-t {
+  font-size: 1.4rem;
+  line-height: 2rem;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  overflow-wrap: anywhere;
+}
+.ytlt-sv-c {
+  font-size: 1.2rem;
+  line-height: 1.6rem;
+  color: var(--yt-spec-text-secondary, #aaa);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.ytlt-sv-rm {
+  position: absolute;
+  top: 6px;
+  right: 4px;
+  width: 26px;
+  height: 26px;
+  padding: 4px !important;
+  border-radius: 50%;
+  display: none;
+  background: var(--yt-spec-base-background, #0f0f0f) !important;
+  color: var(--yt-spec-text-secondary, #aaa) !important;
+}
+.ytlt-sv-rm:hover {
+  color: var(--yt-spec-text-primary, #fff) !important;
+}
+.ytlt-sv-rm svg {
+  width: 18px;
+  height: 18px;
+}
+.ytlt-sv-item:hover .ytlt-sv-rm {
+  display: block;
+}
+.ytlt-sv-more {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  width: 100%;
+  height: 40px;
+  padding: 0 12px !important;
+  border-radius: 10px;
+  font-size: 1.4rem !important;
+}
+.ytlt-sv-more svg {
+  width: 24px;
+  height: 24px;
+}
+.ytlt-sv-more.less svg {
+  transform: rotate(180deg);
+}
+.ytlt-sv-empty {
+  padding: 4px 12px 8px;
+  font-size: 1.3rem;
+  line-height: 1.8rem;
+  color: var(--yt-spec-text-secondary, #aaa);
+}
+.ytlt-sv-empty svg {
+  display: inline-block !important;
+  width: 16px;
+  height: 16px;
+  vertical-align: -3px;
+}

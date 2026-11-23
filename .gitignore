@@ -1,0 +1,5 @@
+# Local backup of Chrome extension storage (personal data) - never publish
+.backup-*/
+
+# macOS
+.DS_Store

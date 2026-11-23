@@ -1,0 +1,129 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 640" width="1200" height="640" font-family="-apple-system, 'Segoe UI', Roboto, Arial, sans-serif">
+  <title>YouTube Study Mode: Home feed without thumbnails, one-click Not interested, and the Saved list in the sidebar</title>
+  <defs>
+    <symbol id="ni" viewBox="0 0 24 24"><path fill="currentColor" d="M12 1C5.925 1 1 5.925 1 12s4.925 11 11 11 11-4.925 11-11S18.075 1 12 1Zm0 2a9 9 0 018.246 12.605L4.755 6.661A8.99 8.99 0 0112 3ZM3.754 8.393l15.491 8.944A9 9 0 013.754 8.393Z"/></symbol>
+    <symbol id="bm" viewBox="0 0 24 24"><path fill="currentColor" d="M17 3H7c-1.1 0-2 .9-2 2v16l7-3 7 3V5c0-1.1-.9-2-2-2zm0 15-5-2.18L7 18V5h10v13z"/></symbol>
+    <symbol id="bmOn" viewBox="0 0 24 24"><path fill="currentColor" d="M17 3H7c-1.1 0-2 .9-2 2v16l7-3 7 3V5c0-1.1-.9-2-2-2z"/></symbol>
+    <symbol id="eyeOff" viewBox="0 0 24 24"><path fill="currentColor" d="M12 7a5 5 0 0 1 5 5c0 .65-.13 1.26-.36 1.83l2.92 2.92A11.8 11.8 0 0 0 23 12c-1.73-4.39-6-7.5-11-7.5-1.4 0-2.74.25-3.98.7l2.16 2.16C10.74 7.13 11.35 7 12 7zM2 4.27l2.28 2.28.46.46A11.8 11.8 0 0 0 1 12c1.73 4.39 6 7.5 11 7.5 1.55 0 3.03-.3 4.38-.84l.42.42L19.73 22 21 20.73 3.27 3 2 4.27zM7.53 9.8l1.55 1.55A2.82 2.82 0 0 0 9 12a3 3 0 0 0 3 3c.22 0 .44-.03.65-.08l1.55 1.55A5 5 0 0 1 7.53 9.8z"/></symbol>
+    <symbol id="chev" viewBox="0 0 24 24"><path fill="currentColor" d="M7.41 15.41 12 10.83l4.59 4.58L18 14l-6-6-6 6z"/></symbol>
+  </defs>
+
+  <rect width="1200" height="640" fill="#0f0f0f"/>
+
+  <!-- top bar -->
+  <rect x="0" y="0" width="1200" height="56" fill="#0f0f0f"/>
+  <g fill="#f1f1f1"><rect x="24" y="20" width="18" height="2" rx="1"/><rect x="24" y="27" width="18" height="2" rx="1"/><rect x="24" y="34" width="18" height="2" rx="1"/></g>
+  <rect x="62" y="17" width="30" height="22" rx="6" fill="#ff0033"/><path d="M73 22v12l9-6z" fill="#fff"/>
+  <text x="98" y="35" fill="#f1f1f1" font-size="18" font-weight="700">YouTube</text>
+  <rect x="400" y="12" width="420" height="34" rx="17" fill="#121212" stroke="#303030"/>
+  <text x="420" y="34" fill="#888" font-size="14">Search</text>
+
+  <!-- sidebar -->
+  <rect x="12" y="64" width="216" height="40" rx="10" fill="#272727"/>
+  <path d="M30 90V79l8-6 8 6v11h-5v-6h-6v6z" fill="#f1f1f1"/>
+  <text x="62" y="89" fill="#f1f1f1" font-size="14" font-weight="500">Home</text>
+  <line x1="12" y1="116" x2="228" y2="116" stroke="#3f3f3f"/>
+
+  <!-- Saved section (highlighted) -->
+  <rect x="8" y="124" width="224" height="236" rx="12" fill="none" stroke="#ffd166" stroke-width="2" stroke-dasharray="6 5"/>
+  <text x="24" y="152" fill="#f1f1f1" font-size="16" font-weight="700">Saved</text>
+  <rect x="78" y="139" width="22" height="18" rx="9" fill="#272727"/><text x="89" y="152" fill="#aaa" font-size="12" text-anchor="middle">3</text>
+  <use href="#chev" x="164" y="136" width="20" height="20" color="#f1f1f1"/>
+  <use href="#eyeOff" x="198" y="136" width="20" height="20" color="#aaa"/>
+
+  <g font-size="13">
+    <circle cx="36" cy="184" r="12" fill="#5c7cfa"/>
+    <text x="58" y="182" fill="#f1f1f1">How to Pronounce the</text>
+    <text x="58" y="199" fill="#f1f1f1">TH Sound</text>
+    <text x="58" y="215" fill="#aaa" font-size="11.5">Speak Clearly · 8:41</text>
+
+    <circle cx="36" cy="246" r="12" fill="#20c997"/>
+    <text x="58" y="244" fill="#f1f1f1">Daily English Listening:</text>
+    <text x="58" y="261" fill="#f1f1f1">At the Coffee Shop</text>
+    <text x="58" y="277" fill="#aaa" font-size="11.5">Everyday English · 14:05</text>
+
+    <circle cx="36" cy="308" r="12" fill="#f76707"/>
+    <text x="58" y="306" fill="#f1f1f1">Why We Forget New</text>
+    <text x="58" y="323" fill="#f1f1f1">Words (and How to Stop)</text>
+    <text x="58" y="339" fill="#aaa" font-size="11.5">Learning Lab · 11:20</text>
+  </g>
+  <line x1="12" y1="372" x2="228" y2="372" stroke="#3f3f3f"/>
+  <text x="24" y="402" fill="#f1f1f1" font-size="16" font-weight="700">Subscriptions</text>
+  <g font-size="14" fill="#f1f1f1">
+    <circle cx="36" cy="434" r="12" fill="#495057"/><text x="62" y="439">Channel One</text>
+    <circle cx="36" cy="470" r="12" fill="#495057"/><text x="62" y="475">Channel Two</text>
+    <circle cx="36" cy="506" r="12" fill="#495057"/><text x="62" y="511">Channel Three</text>
+  </g>
+
+  <!-- chips -->
+  <g font-size="13" font-weight="500">
+    <rect x="260" y="68" width="40" height="30" rx="8" fill="#f1f1f1"/><text x="280" y="88" fill="#0f0f0f" text-anchor="middle">All</text>
+    <rect x="310" y="68" width="76" height="30" rx="8" fill="#272727"/><text x="348" y="88" fill="#f1f1f1" text-anchor="middle">Podcasts</text>
+    <rect x="396" y="68" width="74" height="30" rx="8" fill="#272727"/><text x="433" y="88" fill="#f1f1f1" text-anchor="middle">Learning</text>
+    <rect x="480" y="68" width="62" height="30" rx="8" fill="#272727"/><text x="511" y="88" fill="#f1f1f1" text-anchor="middle">Music</text>
+  </g>
+
+  <!-- card grid: 2 columns × 3 rows, no thumbnails -->
+  <g id="cards" font-size="14">
+    <!-- row 1 -->
+    <rect x="260" y="116" width="440" height="114" rx="12" fill="none" stroke="#3f3f3f"/>
+    <circle cx="292" cy="148" r="18" fill="#5c7cfa"/>
+    <text x="322" y="146" fill="#f1f1f1" font-weight="600">How to Pronounce the TH Sound</text>
+    <text x="322" y="168" fill="#aaa" font-size="13">Speak Clearly · 1.2M views · 2 years ago</text>
+    <text x="322" y="192" fill="#aaa" font-size="12" font-weight="500">8:41</text>
+    <use href="#ni" x="666" y="128" width="20" height="20" color="#f1f1f1"/>
+    <use href="#bmOn" x="666" y="166" width="20" height="20" color="#3ea6ff"/>
+
+    <rect x="720" y="116" width="440" height="114" rx="12" fill="none" stroke="#3f3f3f"/>
+    <circle cx="752" cy="148" r="18" fill="#be4bdb"/>
+    <text x="782" y="146" fill="#f1f1f1" font-weight="600">A Short History of the Printing</text>
+    <text x="782" y="166" fill="#f1f1f1" font-weight="600">Press, Explained in 10 Minutes</text>
+    <text x="782" y="188" fill="#aaa" font-size="13">History Notes · 640K views · 3 months ago</text>
+    <text x="782" y="210" fill="#aaa" font-size="12" font-weight="500">10:02</text>
+    <use href="#ni" x="1126" y="128" width="20" height="20" color="#f1f1f1"/>
+
+    <!-- row 2 (the hovered card: shows the bookmark button) -->
+    <rect x="260" y="244" width="440" height="114" rx="12" fill="#1f1f1f" stroke="#3f3f3f"/>
+    <circle cx="292" cy="276" r="18" fill="#20c997"/>
+    <text x="322" y="274" fill="#f1f1f1" font-weight="600">Daily English Listening: At the</text>
+    <text x="322" y="294" fill="#f1f1f1" font-weight="600">Coffee Shop</text>
+    <text x="322" y="316" fill="#aaa" font-size="13">Everyday English · 380K views · 1 month ago</text>
+    <text x="322" y="338" fill="#aaa" font-size="12" font-weight="500">14:05</text>
+    <use href="#ni" x="666" y="256" width="20" height="20" color="#f1f1f1"/>
+    <circle cx="676" cy="304" r="16" fill="#3a3a3a"/>
+    <use href="#bm" x="666" y="294" width="20" height="20" color="#f1f1f1"/>
+
+    <rect x="720" y="244" width="440" height="114" rx="12" fill="none" stroke="#3f3f3f"/>
+    <circle cx="752" cy="276" r="18" fill="#fab005"/>
+    <text x="782" y="274" fill="#f1f1f1" font-weight="600">I Tried Learning Piano for 30 Days</text>
+    <text x="782" y="296" fill="#aaa" font-size="13">Weekend Projects · 2.4M views · 1 year ago</text>
+    <text x="782" y="320" fill="#aaa" font-size="12" font-weight="500">18:47</text>
+    <use href="#ni" x="1126" y="256" width="20" height="20" color="#f1f1f1"/>
+
+    <!-- row 3 -->
+    <rect x="260" y="372" width="440" height="114" rx="12" fill="none" stroke="#3f3f3f"/>
+    <circle cx="292" cy="404" r="18" fill="#f76707"/>
+    <text x="322" y="402" fill="#f1f1f1" font-weight="600">Why We Forget New Words (and</text>
+    <text x="322" y="422" fill="#f1f1f1" font-weight="600">How to Stop)</text>
+    <text x="322" y="444" fill="#aaa" font-size="13">Learning Lab · 910K views · 5 months ago</text>
+    <text x="322" y="466" fill="#aaa" font-size="12" font-weight="500">11:20</text>
+    <use href="#ni" x="666" y="384" width="20" height="20" color="#f1f1f1"/>
+    <use href="#bmOn" x="666" y="422" width="20" height="20" color="#3ea6ff"/>
+
+    <rect x="720" y="372" width="440" height="114" rx="12" fill="none" stroke="#3f3f3f"/>
+    <circle cx="752" cy="404" r="18" fill="#868e96"/>
+    <text x="782" y="402" fill="#f1f1f1" font-weight="600">Ocean Sounds for Deep Focus</text>
+    <text x="782" y="424" fill="#aaa" font-size="13">Calm Corner · 5.1M views · 2 years ago</text>
+    <text x="782" y="448" fill="#aaa" font-size="12" font-weight="500">3:00:00</text>
+    <use href="#ni" x="1126" y="384" width="20" height="20" color="#f1f1f1"/>
+  </g>
+
+  <!-- callouts -->
+  <g font-size="14" fill="#ffd166">
+    <rect x="260" y="512" width="900" height="112" rx="12" fill="#1a1a1a" stroke="#ffd166" stroke-opacity="0.5"/>
+    <text x="280" y="540" font-weight="700">What you see</text>
+    <text x="280" y="564" fill="#f1f1f1">①  No thumbnails, no Shorts, no ads: only the channel picture, title, channel, views and length.</text>
+    <text x="280" y="586" fill="#f1f1f1">②  <tspan fill="#ffd166">⊘</tspan> (top-right of each card) = “Not interested”. One click and the video disappears.</text>
+    <text x="280" y="608" fill="#f1f1f1">③  <tspan fill="#3ea6ff">Bookmark</tspan> (appears on hover) saves the video to your own list, shown under “Saved” on the left.</text>
+  </g>
+</svg>
